@@ -1,12 +1,17 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+}
+
+img {
+  box-sizing: content-box;
 }
 
 body {
@@ -72,4 +77,32 @@ button:active {
 .content p {
   color: #909090;
   text-align: center;
+}
+
+.recipeLink {
+  text-align: center;
+}
+
+.recipe-card {
+  display: inline-block;
+  padding: 15px;
+}
+.recipeLink img {
+  display: block;
+  height: 300px;
+  width: 400px;
+}
+
+.recipe-card-wrapper span {
+  display: block;
+  padding: 8px;
+  color: black;
+}
+
+.recipe-card-wrapper {
+  border: 2px solid black;
+}
+
+.recipe-card-wrapper:hover {
+  border: 2px solid #0b9963;
 }
