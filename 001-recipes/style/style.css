@@ -88,22 +88,23 @@ button:active {
 .recipeLink img {
   max-width: 100%;
   height: auto;
-  display: block;
   aspect-ratio: 4/3;
   object-fit: cover;
   border-bottom: 1px solid black;
+}
+
+.recipe-card-wrapper {
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.recipe-card-wrapper:hover {
+  border: 2px solid #0b9963;
 }
 
 .recipe-card-wrapper span {
   display: block;
   padding: 8px;
   color: black;
-}
-
-.recipe-card-wrapper {
-  border: 2px solid black;
-}
-
-.recipe-card-wrapper:hover {
-  border: 2px solid #0b9963;
 }
