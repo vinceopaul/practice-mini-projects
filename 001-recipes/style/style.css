@@ -13,7 +13,8 @@
 img {
   box-sizing: content-box;
 }
-a {
+a,
+a:active {
   text-decoration: none;
 }
 
@@ -87,9 +88,12 @@ button:active {
   padding: 15px;
 }
 .recipeLink img {
+  max-width: 100%;
+  height: auto;
   display: block;
-  height: 300px;
-  width: 400px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-bottom: 1px solid black;
 }
 
 .recipe-card-wrapper span {
