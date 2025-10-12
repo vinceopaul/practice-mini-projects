@@ -85,6 +85,7 @@ button:active {
   display: inline-block;
   padding: 15px;
 }
+
 .recipeLink img {
   max-width: 100%;
   height: auto;
@@ -92,7 +93,6 @@ button:active {
   object-fit: cover;
   border-bottom: 1px solid black;
 }
-
 .recipe-card-wrapper {
   border: 2px solid black;
   border-radius: 10px;
@@ -103,8 +103,7 @@ button:active {
   border: 2px solid #0b9963;
 }
 
-.recipe-card-wrapper span {
-  display: block;
+.recipe-card-wrapper h3 {
   padding: 8px;
   color: black;
 }
