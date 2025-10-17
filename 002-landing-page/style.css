@@ -9,8 +9,7 @@
   font-family: Roboto, sans-serif;
 }
 
-header,
-footer {
+header {
   background-color: #1f2937;
 }
 
@@ -38,14 +37,4 @@ ul a {
   font-size: 1.125rem;
   font-weight: 300;
   text-decoration: none;
-}
-
-footer {
-  height: 72px;
-  color: #e5e7eb;
-  font-size: 1.125rem;
-  font-weight: 200;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
