@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   font-family: Roboto, sans-serif;
-  border: 1px solid darkcyan;
+  /* border: 1px solid darkcyan; */
 }
 
 body {
@@ -99,6 +99,33 @@ main {
   font-weight: 400;
 }
 
+.quote {
+  background-color: #e5e7eb;
+}
+.quote > div {
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.quote-content {
+  width: 880px;
+}
+
+.quote .quote-text {
+  font-size: 2.25rem;
+  font-weight: 300;
+  font-style: italic;
+  color: #1f2937;
+  text-align: justify;
+}
+
+.quote .cite {
+  color: #1f2937;
+  text-align: end;
+}
+
 .cta > div {
   height: 352px;
   display: flex;
@@ -116,7 +143,7 @@ main {
   border-radius: 8px;
 }
 
-h3 {
+.cta h3 {
   color: #f9faf8;
 }
 p {
