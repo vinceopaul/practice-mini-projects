@@ -15,16 +15,21 @@ body {
   min-height: 100vh;
 }
 
-header,
-footer {
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.site-header,
+.site-footer {
   background-color: #1f2937;
 }
 
-nav {
+.site-header .nav > div {
   height: 72px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
 }
 
 .header-logo {
@@ -51,7 +56,7 @@ main {
   flex: 1;
 }
 
-footer {
+.site-footer {
   height: 72px;
   display: flex;
   flex-direction: column;
