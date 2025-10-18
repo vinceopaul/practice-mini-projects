@@ -53,7 +53,54 @@ ul a {
 
 main {
   display: flex;
+  flex-direction: column;
   flex: 1;
+}
+
+.cta > div {
+  height: 352px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-content {
+  height: 144px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+  background-color: #3882f6;
+  border-radius: 8px;
+}
+
+h3 {
+  color: #f9faf8;
+}
+p {
+  color: #ced9ed;
+}
+
+button {
+  background-color: #3882f6;
+  color: #f9faf8;
+  font-size: 1em;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 2px solid white;
+  height: 32px;
+  width: 130px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  background-color: white;
+  color: #3882f6;
+  position: relative;
+  top: 1px;
 }
 
 .site-footer {
