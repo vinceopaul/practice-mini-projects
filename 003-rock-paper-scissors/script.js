@@ -40,3 +40,6 @@ function getPlayerChoice() {
 
 console.log("player:", getPlayerChoice());
 console.log("comp:", getComputerChoice());
+
+let humanScore = 0;
+let computerScore = 0;
