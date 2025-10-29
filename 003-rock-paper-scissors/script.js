@@ -38,7 +38,7 @@ function getPlayerChoice() {
   return choice;
 }
 
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
 
 function playRound(playerChoice, computerChoice) {
@@ -52,7 +52,7 @@ function playRound(playerChoice, computerChoice) {
           computerScore += 1;
         } else {
           console.log("You win! Rock wins Scissors!");
-          humanScore += 1;
+          playerScore += 1;
         }
         break;
       case "paper":
@@ -61,7 +61,7 @@ function playRound(playerChoice, computerChoice) {
           computerScore += 1;
         } else {
           console.log("You win! Paper wins Rock!");
-          humanScore += 1;
+          playerScore += 1;
         }
         break;
       case "scissors":
@@ -70,7 +70,7 @@ function playRound(playerChoice, computerChoice) {
           computerScore += 1;
         } else {
           console.log("You win! Scissors wins Paper!");
-          humanScore += 1;
+          playerScore += 1;
         }
         break;
     }
@@ -86,5 +86,5 @@ console.log(computerSelection);
 playRound(playerSelection, computerSelection);
 
 //Score Test
-console.log(humanScore);
+console.log(playerScore);
 console.log(computerScore);
