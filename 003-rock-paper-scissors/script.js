@@ -1,19 +1,7 @@
 //Rock Paper Scissors
 function getComputerChoice() {
   const randVal = Math.round(Math.random() * 2);
-  let choice = "";
-
-  switch (randVal) {
-    case 0:
-      choice = "rock";
-      break;
-    case 1:
-      choice = "paper";
-      break;
-    case 2:
-      choice = "scissors";
-      break;
-  }
+  const choice = ["rock", "paper", "scissors"][randVal];
   return choice;
 }
 
