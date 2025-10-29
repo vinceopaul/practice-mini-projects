@@ -18,24 +18,10 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-  const playerInput = prompt(
-    "Hello Player! Input:\n1 - Rock\n2 - Paper\n3 - Scissors"
+  const playerChoice = prompt(
+    "Hello Player! Type your hand sign:\nRock\nPaper\nScissors"
   );
-  let choice = "";
-
-  switch (playerInput) {
-    case "1":
-      choice = "rock";
-      break;
-    case "2":
-      choice = "paper";
-      break;
-    case "3":
-      choice = "scissors";
-      break;
-  }
-
-  return choice;
+  return playerChoice.toLowerCase();
 }
 
 let playerScore = 0;
