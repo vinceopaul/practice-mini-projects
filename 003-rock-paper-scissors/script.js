@@ -15,18 +15,22 @@ function getPlayerChoice() {
 const adjustTieGameRound = (count, round, pScore, compScore) =>
   count === round && pScore === compScore ? round + 1 : round;
 
+function getWinningChoice(pChoice) {
+  const beats = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper",
+  };
+  return beats[pChoice];
+}
+
 function playGame() {
   let playerScore = 0;
   let computerScore = 0;
 
   function playRound(playerChoice, computerChoice) {
-    const beats = {
-      rock: "scissors",
-      paper: "rock",
-      scissors: "paper",
-    };
     if (playerChoice === computerChoice) console.log("It's a tie! Play Again!");
-    else if (computerChoice === beats[playerChoice]) {
+    else if (computerChoice === getWinningChoice(playerChoice)) {
       console.log(`You win! ${playerChoice} wins ${computerChoice}`);
       playerScore += 1;
     } else {
