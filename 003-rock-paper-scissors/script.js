@@ -1,4 +1,9 @@
 //Rock Paper Scissors
+//*November 01, 2025
+//*To adjust after learning DOM (TENTATIVE):
+//* 1) Title Case win or lose text
+//* 2) Object lookup for messages
+//* 3) Remove adjustTieGameRound() and follow the RPS best of 3 or 5 rule
 function getComputerChoice() {
   const randVal = Math.round(Math.random() * 2);
   const choice = ["rock", "paper", "scissors"][randVal];
