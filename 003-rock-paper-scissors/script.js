@@ -59,6 +59,12 @@ function playGame() {
 
     counter++;
   } while (counter <= gameRound);
+
+  console.log(
+    playerScore > computerScore
+      ? "Congratulation! You win!"
+      : "You lose! Better luck next time!"
+  );
 }
 
 playGame();
