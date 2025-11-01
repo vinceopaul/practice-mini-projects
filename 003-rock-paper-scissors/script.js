@@ -12,11 +12,8 @@ function getPlayerChoice() {
   return playerChoice.toLowerCase();
 }
 
-function adjustTieGameRound(count, round, pScore, compScore) {
-  if (count === round && pScore === compScore) {
-    return round + 1;
-  } else return round;
-}
+const adjustTieGameRound = (count, round, pScore, compScore) =>
+  count === round && pScore === compScore ? round + 1 : round;
 
 function playGame() {
   let playerScore = 0;
