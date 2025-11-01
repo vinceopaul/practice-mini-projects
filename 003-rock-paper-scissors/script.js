@@ -16,38 +16,18 @@ let playerScore = 0;
 let computerScore = 0;
 
 function playRound(playerChoice, computerChoice) {
-  if (playerChoice === computerChoice) {
-    console.log("It's a tie! Play Again!");
+  const beats = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper",
+  };
+  if (playerChoice === computerChoice) console.log("It's a tie! Play Again!");
+  else if (computerChoice === beats[playerChoice]) {
+    console.log(`You win! ${playerChoice} wins ${computerChoice}`);
+    playerScore += 1;
   } else {
-    switch (playerChoice) {
-      case "rock":
-        if (computerChoice === "paper") {
-          console.log("You lose! Paper wins Rock!");
-          computerScore += 1;
-        } else {
-          console.log("You win! Rock wins Scissors!");
-          playerScore += 1;
-        }
-        break;
-      case "paper":
-        if (computerChoice === "scissors") {
-          console.log("You lose! Scissors wins Paper!");
-          computerScore += 1;
-        } else {
-          console.log("You win! Paper wins Rock!");
-          playerScore += 1;
-        }
-        break;
-      case "scissors":
-        if (computerChoice === "rock") {
-          console.log("You lose! Rock wins Scissors!");
-          computerScore += 1;
-        } else {
-          console.log("You win! Scissors wins Paper!");
-          playerScore += 1;
-        }
-        break;
-    }
+    console.log(`You lose! ${computerChoice} wins ${playerChoice}`);
+    computerScore += 1;
   }
 }
 
