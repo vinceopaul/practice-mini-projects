@@ -12,6 +12,12 @@ function getPlayerChoice() {
   return playerChoice.toLowerCase();
 }
 
+function adjustTieGameRound(count, round, pScore, compScore) {
+  if (count === round && pScore === compScore) {
+    return round + 1;
+  } else return round;
+}
+
 function playGame() {
   let playerScore = 0;
   let computerScore = 0;
@@ -46,6 +52,14 @@ function playGame() {
     //Score Test
     console.log(playerScore);
     console.log(computerScore);
+
+    //Check tie round
+    gameRound = adjustTieGameRound(
+      counter,
+      gameRound,
+      playerScore,
+      computerScore
+    );
 
     counter++;
   } while (counter <= gameRound);
