@@ -44,14 +44,10 @@ function playGame() {
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
 
-    console.log(playerSelection);
-    console.log(computerSelection);
-
     playRound(playerSelection, computerSelection);
 
     //Score Test
-    console.log(playerScore);
-    console.log(computerScore);
+    console.log(playerScore, computerScore);
 
     //Check tie round
     gameRound = adjustTieGameRound(
