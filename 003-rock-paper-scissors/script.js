@@ -32,17 +32,23 @@ function playGame() {
     }
   }
 
-  const playerSelection = getPlayerChoice();
-  const computerSelection = getComputerChoice();
+  let gameRound = 5;
+  let counter = 1;
+  do {
+    const playerSelection = getPlayerChoice();
+    const computerSelection = getComputerChoice();
 
-  console.log(playerSelection);
-  console.log(computerSelection);
+    console.log(playerSelection);
+    console.log(computerSelection);
 
-  playRound(playerSelection, computerSelection);
+    playRound(playerSelection, computerSelection);
 
-  //Score Test
-  console.log(playerScore);
-  console.log(computerScore);
+    //Score Test
+    console.log(playerScore);
+    console.log(computerScore);
+
+    counter++;
+  } while (counter <= gameRound);
 }
 
 playGame();
