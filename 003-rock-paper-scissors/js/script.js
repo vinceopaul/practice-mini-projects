@@ -18,6 +18,12 @@ function getWinningChoice(pChoice) {
   return beats[pChoice];
 }
 
+const displayCurrentChoice = (pSelection, compSelection) => {
+  const displayChoice = document.querySelector(".displayChoice");
+  displayChoice.firstElementChild.textContent = `Player choses: ${pSelection}`;
+  displayChoice.children[1].textContent = `Computer choses: ${compSelection}`;
+};
+
 function playGame(playerChoice) {
   let playerScore = 0;
   let computerScore = 0;
@@ -34,6 +40,9 @@ function playGame(playerChoice) {
   }
   const playerSelection = playerChoice;
   const computerSelection = getComputerChoice();
+
+  // Display Player and Comp Choice
+  displayCurrentChoice(playerSelection, computerSelection);
 
   playRound(playerSelection, computerSelection);
 
