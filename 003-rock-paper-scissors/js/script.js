@@ -17,9 +17,6 @@ function getPlayerChoice() {
   return playerChoice.toLowerCase();
 }
 
-const adjustTieGameRound = (count, round, pScore, compScore) =>
-  count === round && pScore === compScore ? round + 1 : round;
-
 function getWinningChoice(pChoice) {
   const beats = {
     rock: "scissors",
@@ -43,29 +40,13 @@ function playGame() {
       computerScore += 1;
     }
   }
+  const playerSelection = getPlayerChoice();
+  const computerSelection = getComputerChoice();
 
-  let gameRound = 5;
-  let counter = 1;
-  do {
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
+  playRound(playerSelection, computerSelection);
 
-    playRound(playerSelection, computerSelection);
-
-    //Score Test
-    console.log(playerScore, computerScore);
-
-    //Check tie round
-    gameRound = adjustTieGameRound(
-      counter,
-      gameRound,
-      playerScore,
-      computerScore
-    );
-
-    counter++;
-  } while (counter <= gameRound);
-
+  //Score Test
+  console.log(playerScore, computerScore);
   console.log(
     playerScore > computerScore
       ? "Congratulation! You win!"
