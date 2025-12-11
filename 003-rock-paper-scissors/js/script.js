@@ -9,14 +9,6 @@ function getComputerChoice() {
   const choice = ["rock", "paper", "scissors"][randVal];
   return choice;
 }
-
-function getPlayerChoice() {
-  const playerChoice = prompt(
-    "Hello Player! Type your hand sign:\nRock\nPaper\nScissors"
-  );
-  return playerChoice.toLowerCase();
-}
-
 function getWinningChoice(pChoice) {
   const beats = {
     rock: "scissors",
@@ -40,7 +32,7 @@ function playGame() {
       computerScore += 1;
     }
   }
-  const playerSelection = getPlayerChoice();
+  const playerSelection = "rock";
   const computerSelection = getComputerChoice();
 
   playRound(playerSelection, computerSelection);
