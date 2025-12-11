@@ -27,15 +27,20 @@ const displayCurrentChoice = (pSelection, compSelection) => {
 function playGame(playerChoice) {
   let playerScore = 0;
   let computerScore = 0;
+  let result = ``;
 
   function playRound(playerChoice, computerChoice) {
-    if (playerChoice === computerChoice) console.log("It's a tie! Play Again!");
-    else if (computerChoice === getWinningChoice(playerChoice)) {
-      console.log(`You win! ${playerChoice} wins ${computerChoice}`);
+    if (playerChoice === computerChoice) {
+      result = "It's a tie! Play Again!";
+      return result;
+    } else if (computerChoice === getWinningChoice(playerChoice)) {
+      result = `You win! ${playerChoice} wins ${computerChoice}`;
       playerScore += 1;
+      return result;
     } else {
-      console.log(`You lose! ${computerChoice} wins ${playerChoice}`);
+      result = `You lose! ${computerChoice} wins ${playerChoice}`;
       computerScore += 1;
+      return result;
     }
   }
   const playerSelection = playerChoice;
@@ -44,7 +49,12 @@ function playGame(playerChoice) {
   // Display Player and Comp Choice
   displayCurrentChoice(playerSelection, computerSelection);
 
-  playRound(playerSelection, computerSelection);
+  //Display Result
+  const displayResult = document.querySelector(".displayResult");
+  displayResult.firstElementChild.textContent = playRound(
+    playerSelection,
+    computerSelection
+  );
 
   //Score Test
   console.log(playerScore, computerScore);
