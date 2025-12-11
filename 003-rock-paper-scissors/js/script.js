@@ -18,7 +18,7 @@ function getWinningChoice(pChoice) {
   return beats[pChoice];
 }
 
-function playGame() {
+function playGame(playerChoice) {
   let playerScore = 0;
   let computerScore = 0;
 
@@ -32,7 +32,7 @@ function playGame() {
       computerScore += 1;
     }
   }
-  const playerSelection = "rock";
+  const playerSelection = playerChoice;
   const computerSelection = getComputerChoice();
 
   playRound(playerSelection, computerSelection);
@@ -46,4 +46,13 @@ function playGame() {
   );
 }
 
-playGame();
+const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
+
+playerChoices.forEach((buttonChoice) => {
+  let playerChoice = "";
+  buttonChoice.addEventListener("click", () => {
+    playerChoice = buttonChoice.className;
+    console.log(playerChoice);
+    playGame(playerChoice);
+  });
+});
