@@ -24,22 +24,43 @@ const displayCurrentChoice = (pSelection, compSelection) => {
   displayChoice.children[1].textContent = `Computer choses: ${compSelection}`;
 };
 
+const createRoundResultIcon = (didPlayerWin) => {
+  const iconSpan = document.createElement("span");
+
+  if (didPlayerWin === "no") {
+    iconSpan.className = "cross-mark";
+    iconSpan.textContent = "\u{2717}";
+  } else if (didPlayerWin === "yes") {
+    iconSpan.className = "check-mark";
+    iconSpan.textContent = "\u{2713}";
+  } else {
+    iconSpan.className = "tie-mark";
+    iconSpan.textContent = "\u{2796}";
+  }
+
+  return iconSpan;
+};
+
 function playGame(playerChoice) {
   let playerScore = 0;
   let computerScore = 0;
   let result = ``;
+  let playerWins = "no";
 
   function playRound(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
       result = "It's a tie! Play Again!";
+      playerWins = "tie";
       return result;
     } else if (computerChoice === getWinningChoice(playerChoice)) {
       result = `You win! ${playerChoice} wins ${computerChoice}`;
       playerScore += 1;
+      playerWins = "yes";
       return result;
     } else {
       result = `You lose! ${computerChoice} wins ${playerChoice}`;
       computerScore += 1;
+      playerWins = "no";
       return result;
     }
   }
@@ -57,7 +78,15 @@ function playGame(playerChoice) {
   );
 
   //Score Test
-  console.log(playerScore, computerScore);
+  console.log(playerScore, computerScore, playerWins);
+
+  // DisplayWinner
+  const displayRoundResult = document.querySelector(".displayRoundResult");
+
+  const resultIcon = createRoundResultIcon(playerWins);
+
+  displayRoundResult.appendChild(resultIcon);
+
   console.log(
     playerScore > computerScore
       ? "Congratulation! You win!"
