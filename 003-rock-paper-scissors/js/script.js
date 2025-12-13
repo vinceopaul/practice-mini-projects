@@ -83,7 +83,7 @@ function playRound(playerChoice) {
   const displayResult = document.querySelector(".displayResult");
   displayResult.firstElementChild.textContent = roundDataResult.at(1);
 
-  if (roundDataResult.at(0) !== "yes") {
+  if (roundDataResult.at(0) !== "tie") {
     // Display Round Result Icon
     const displayRoundResult = document.querySelector(".displayRoundResult");
 
