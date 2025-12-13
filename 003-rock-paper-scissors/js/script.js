@@ -90,8 +90,23 @@ function playRound(playerChoice) {
     const resultIcon = createRoundResultIcon(roundDataResult.at(0));
 
     displayRoundResult.appendChild(resultIcon);
+
+    // Get Number of Player/Comp marks
+    checkFinalWinnerStatus(displayRoundResult);
   }
 }
+
+const checkFinalWinnerStatus = (displayRoundResult) => {
+  const playerMarks = displayRoundResult.getElementsByClassName("check-mark");
+  const computerMarks = displayRoundResult.getElementsByClassName("cross-mark");
+
+  if (computerMarks.length === 5) {
+    console.log("Computer Wins! Better luck Next time!");
+  }
+  if (playerMarks.length === 5) {
+    console.log("Congrats! Player Wins!");
+  }
+};
 
 const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
 playerChoices.forEach((buttonChoice) => {
