@@ -38,6 +38,7 @@ const getResultMsg = (didPlayerWin, playerChoice, computerChoice) => {
     no: `You lose! ${computerChoice} wins ${playerChoice}`,
     win: "Congrats! Player Wins!",
     lose: "Computer Wins! Better luck Next time!",
+    "": "no msg",
   };
 
   return msg[didPlayerWin];
@@ -91,10 +92,6 @@ function playRound(playerChoice) {
   roundDataResult = getRoundResult(playerSelection, computerSelection);
   console.log("roundData,", roundDataResult);
 
-  // Display Round Result
-  const displayResult = document.querySelector(".displayResult");
-  displayResult.firstElementChild.textContent = roundDataResult.at(1);
-
   if (roundDataResult.at(0) !== "tie") {
     // Display Round Result Icon
     const displayRoundResult = document.querySelector(".displayRoundResult");
@@ -103,21 +100,39 @@ function playRound(playerChoice) {
 
     displayRoundResult.appendChild(resultIcon);
 
-    // Get Number of Player/Comp marks
-    checkFinalWinnerStatus(displayRoundResult);
+    // Check Winner
+    const isPlayerWinner = checkFinalWinner(displayRoundResult);
+    // Display Round Result
+    const displayResult = document.querySelector(".displayResult");
+    if (
+      (isPlayerWinner.at(0) === false && isPlayerWinner.at(1) !== "no msg") ||
+      isPlayerWinner.at(0) === true
+    ) {
+      displayResult.firstElementChild.textContent = isPlayerWinner.at(1);
+    } else {
+      displayResult.firstElementChild.textContent = roundDataResult.at(1);
+    }
   }
 }
 
-const checkFinalWinnerStatus = (displayRoundResult) => {
+const checkFinalWinner = (displayRoundResult) => {
   const playerMarks = displayRoundResult.getElementsByClassName("check-mark");
   const computerMarks = displayRoundResult.getElementsByClassName("cross-mark");
+  let didPlayerWin = false;
+  let msg = "";
+  let resultData = [];
 
-  if (computerMarks.length === 5) {
-    console.log(getResultMsg("lose"));
+  if (playerMarks.length === 5 || computerMarks.length === 5) {
+    if (playerMarks.length === 5) {
+      msg = "win";
+      didPlayerWin = true;
+    } else {
+      msg = "lose";
+    }
   }
-  if (playerMarks.length === 5) {
-    console.log(getResultMsg("win"));
-  }
+  resultData.push(didPlayerWin, getResultMsg(msg));
+
+  return resultData;
 };
 
 const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
