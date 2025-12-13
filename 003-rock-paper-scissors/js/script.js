@@ -31,6 +31,18 @@ const createRoundResultIcon = (didPlayerWin) => {
   return iconSpan;
 };
 
+const getResultMsg = (didPlayerWin, playerChoice, computerChoice) => {
+  const msg = {
+    tie: "It's a tie! Play Again!",
+    yes: `You win! ${playerChoice} wins ${computerChoice}`,
+    no: `You lose! ${computerChoice} wins ${playerChoice}`,
+    win: "Congrats! Player Wins!",
+    lose: "Computer Wins! Better luck Next time!",
+  };
+
+  return msg[didPlayerWin];
+};
+
 function getWinningChoice(pChoice) {
   const beats = {
     rock: "scissors",
@@ -45,15 +57,15 @@ function getRoundResult(playerChoice, computerChoice) {
   let didPlayerWin = "";
   let getRoundData = [];
   if (playerChoice === computerChoice) {
-    resultMsg = "It's a tie! Play Again!";
     didPlayerWin = "tie";
   } else if (computerChoice === getWinningChoice(playerChoice)) {
-    resultMsg = `You win! ${playerChoice} wins ${computerChoice}`;
     didPlayerWin = "yes";
   } else {
-    resultMsg = `You lose! ${computerChoice} wins ${playerChoice}`;
     didPlayerWin = "no";
   }
+
+  resultMsg = getResultMsg(didPlayerWin, playerChoice, computerChoice);
+
   getRoundData.push(didPlayerWin, resultMsg);
 
   return getRoundData;
@@ -101,10 +113,10 @@ const checkFinalWinnerStatus = (displayRoundResult) => {
   const computerMarks = displayRoundResult.getElementsByClassName("cross-mark");
 
   if (computerMarks.length === 5) {
-    console.log("Computer Wins! Better luck Next time!");
+    console.log(getResultMsg("lose"));
   }
   if (playerMarks.length === 5) {
-    console.log("Congrats! Player Wins!");
+    console.log(getResultMsg("win"));
   }
 };
 
