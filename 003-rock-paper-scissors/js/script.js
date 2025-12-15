@@ -113,13 +113,13 @@ function playRound(playerChoice) {
   // Display Round Result and Check Winner
   const displayResult = document.querySelector(".displayResult");
 
-  const getOutcome = checkWinner();
-  console.log(getOutcome);
+  const gameOutcome = checkWinner();
+  console.log(gameOutcome);
 
-  if (getOutcome === undefined) {
+  if (gameOutcome === undefined) {
     displayResult.firstElementChild.textContent = roundDataResult.message;
   } else {
-    displayResult.firstElementChild.textContent = getResultMsg(getOutcome);
+    displayResult.firstElementChild.textContent = getResultMsg(gameOutcome);
     // Disable button
     disableChoiceBtns();
   }
