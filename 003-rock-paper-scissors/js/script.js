@@ -120,6 +120,8 @@ function playRound(playerChoice) {
     displayResult.firstElementChild.textContent = roundDataResult.message;
   } else {
     displayResult.firstElementChild.textContent = getResultMsg(getOutcome);
+    // Disable button
+    disableChoiceBtns();
   }
 }
 
@@ -132,6 +134,13 @@ const checkWinner = () => {
   }
 
   return playerScore === 5 ? "win" : "lose";
+};
+
+const disableChoiceBtns = () => {
+  const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
+  playerChoices.forEach((buttonChoice) => {
+    buttonChoice.setAttribute("disabled", "");
+  });
 };
 
 const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
