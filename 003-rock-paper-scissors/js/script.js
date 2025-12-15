@@ -57,24 +57,25 @@ function getWinningChoice(pChoice) {
   return beats[pChoice];
 }
 
-function getRoundResult(playerChoice, computerChoice) {
-  let resultMsg = "";
-  let didPlayerWin = "";
-  let getRoundData = [];
+const getRoundResult = (playerChoice, computerChoice) => {
+  let roundResultData = {};
+
   if (playerChoice === computerChoice) {
-    didPlayerWin = "tie";
+    roundResultData.didPlayerWin = "tie";
   } else if (computerChoice === getWinningChoice(playerChoice)) {
-    didPlayerWin = "yes";
+    roundResultData.didPlayerWin = "yes";
   } else {
-    didPlayerWin = "no";
+    roundResultData.didPlayerWin = "no";
   }
 
-  resultMsg = getResultMsg(didPlayerWin, playerChoice, computerChoice);
+  roundResultData.message = getResultMsg(
+    roundResultData.didPlayerWin,
+    playerChoice,
+    computerChoice
+  );
 
-  getRoundData.push(didPlayerWin, resultMsg);
-
-  return getRoundData;
-}
+  return roundResultData;
+};
 
 function getComputerChoice() {
   const randVal = Math.round(Math.random() * 2);
@@ -94,36 +95,31 @@ function playRound(playerChoice) {
   displayChoice.children[1].textContent = `Computer chooses: ${computerSelection}`;
 
   // Get Result
-  let roundDataResult = [];
-  roundDataResult = getRoundResult(playerSelection, computerSelection);
+  const roundDataResult = getRoundResult(playerSelection, computerSelection);
   console.log("roundData,", roundDataResult);
 
-  if (roundDataResult.at(0) !== "tie") {
+  if (roundDataResult.didPlayerWin !== "tie") {
     // Score
-    roundDataResult.at(0) === "yes"
+    roundDataResult.didPlayerWin === "yes"
       ? getScore.playerScore++
       : getScore.computerScore++;
-
-    console.log(getScore);
-
     // Display Round Result Icon
     const displayRoundResult = document.querySelector(".displayRoundResult");
 
-    const resultIcon = createRoundResultIcon(roundDataResult.at(0));
+    const resultIcon = createRoundResultIcon(roundDataResult.didPlayerWin);
 
     displayRoundResult.appendChild(resultIcon);
+  }
+  // Display Round Result and Check Winner
+  const displayResult = document.querySelector(".displayResult");
 
-    // Display Round Result and Check Winner
-    const displayResult = document.querySelector(".displayResult");
+  const getOutcome = checkWinner();
+  console.log(getOutcome);
 
-    const getOutcome = checkWinner();
-    console.log(getOutcome);
-
-    if (getOutcome === undefined) {
-      displayResult.firstElementChild.textContent = roundDataResult.at(1);
-    } else {
-      displayResult.firstElementChild.textContent = getResultMsg(getOutcome);
-    }
+  if (getOutcome === undefined) {
+    displayResult.firstElementChild.textContent = roundDataResult.message;
+  } else {
+    displayResult.firstElementChild.textContent = getResultMsg(getOutcome);
   }
 }
 
