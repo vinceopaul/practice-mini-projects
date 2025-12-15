@@ -19,12 +19,8 @@ const createRoundResultIcon = (didPlayerWin) => {
   if (didPlayerWin === "no") {
     iconSpan.className = "cross-mark";
     iconSpan.innerHTML = CROSS_ICON_SVG;
-  } else if (didPlayerWin === "yes") {
-    iconSpan.className = "check-mark";
-    iconSpan.innerHTML = CHECK_ICON_SVG;
   } else {
-    iconSpan.className = "tie-mark";
-    // iconSpan.textContent = "\u{2796}";
+    iconSpan.className = "check-mark";
     iconSpan.innerHTML = CHECK_ICON_SVG;
   }
 
