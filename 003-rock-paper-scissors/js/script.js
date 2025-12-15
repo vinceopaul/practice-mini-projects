@@ -117,39 +117,29 @@ function playRound(playerChoice) {
 
     displayRoundResult.appendChild(resultIcon);
 
-    // Check Winner
-    const isPlayerWinner = checkFinalWinner(displayRoundResult);
-    // Display Round Result
+    // Display Round Result and Check Winner
     const displayResult = document.querySelector(".displayResult");
-    if (
-      (isPlayerWinner.at(0) === false && isPlayerWinner.at(1) !== "no msg") ||
-      isPlayerWinner.at(0) === true
-    ) {
-      displayResult.firstElementChild.textContent = isPlayerWinner.at(1);
-    } else {
+
+    const getOutcome = checkWinner();
+    console.log(getOutcome);
+
+    if (getOutcome === undefined) {
       displayResult.firstElementChild.textContent = roundDataResult.at(1);
+    } else {
+      displayResult.firstElementChild.textContent = getResultMsg(getOutcome);
     }
   }
 }
 
-const checkFinalWinner = (displayRoundResult) => {
-  const playerMarks = displayRoundResult.getElementsByClassName("check-mark");
-  const computerMarks = displayRoundResult.getElementsByClassName("cross-mark");
-  let didPlayerWin = false;
-  let msg = "";
-  let resultData = [];
+const checkWinner = () => {
+  const playerScore = getScore.playerScore;
+  const computerScore = getScore.computerScore;
 
-  if (playerMarks.length === 5 || computerMarks.length === 5) {
-    if (playerMarks.length === 5) {
-      msg = "win";
-      didPlayerWin = true;
-    } else {
-      msg = "lose";
-    }
+  if (playerScore !== 5 && computerScore !== 5) {
+    return;
   }
-  resultData.push(didPlayerWin, getResultMsg(msg));
 
-  return resultData;
+  return playerScore === 5 ? "win" : "lose";
 };
 
 const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
