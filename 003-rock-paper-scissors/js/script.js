@@ -31,6 +31,14 @@ const createRoundResultIcon = (didPlayerWin) => {
   return iconSpan;
 };
 
+function scoreTracker() {
+  const gameScore = {
+    playerScore: 0,
+    computerScore: 0,
+  };
+  return gameScore;
+}
+
 const getResultMsg = (didPlayerWin, playerChoice, computerChoice) => {
   const msg = {
     tie: "It's a tie! Play Again!",
@@ -78,6 +86,8 @@ function getComputerChoice() {
   return choice;
 }
 
+const getScore = scoreTracker();
+
 function playRound(playerChoice) {
   const playerSelection = playerChoice;
   const computerSelection = getComputerChoice();
@@ -93,6 +103,13 @@ function playRound(playerChoice) {
   console.log("roundData,", roundDataResult);
 
   if (roundDataResult.at(0) !== "tie") {
+    // Score
+    roundDataResult.at(0) === "yes"
+      ? getScore.playerScore++
+      : getScore.computerScore++;
+
+    console.log(getScore);
+
     // Display Round Result Icon
     const displayRoundResult = document.querySelector(".displayRoundResult");
 
