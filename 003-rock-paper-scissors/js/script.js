@@ -130,13 +130,13 @@ const checkWinner = () => {
 };
 
 const disableChoiceBtns = () => {
-  const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
+  const playerChoices = document.querySelectorAll(".controls > button");
   playerChoices.forEach((buttonChoice) => {
     buttonChoice.setAttribute("disabled", "");
   });
 };
 
-const playerChoices = document.querySelectorAll(".playerChoiceBtns > button");
+const playerChoices = document.querySelectorAll(".controls > button");
 playerChoices.forEach((buttonChoice) => {
   let playerChoice = "";
   buttonChoice.addEventListener("click", () => {
