@@ -83,9 +83,9 @@ function playRound(playerChoice) {
   const computerSelection = getComputerChoice();
 
   // Display Player and Comp Choice
-  const displayChoice = document.querySelector(".displayChoice");
-  displayChoice.firstElementChild.textContent = `Player chooses: ${playerSelection}`;
-  displayChoice.children[1].textContent = `Computer chooses: ${computerSelection}`;
+  const displayChoice = document.querySelector(".choices");
+  displayChoice.firstElementChild.textContent = `Computer chooses: ${computerSelection}`;
+  displayChoice.lastElementChild.textContent = `Player chooses: ${playerSelection}`;
 
   // Get Result
   const roundDataResult = getRoundResult(playerSelection, computerSelection);
@@ -97,14 +97,14 @@ function playRound(playerChoice) {
       ? getScore.playerScore++
       : getScore.computerScore++;
     // Display Round Result Icon
-    const displayRoundResult = document.querySelector(".displayRoundResult");
+    const displayRoundResult = document.querySelector(".round-history");
 
     const resultIcon = createRoundResultIcon(roundDataResult.didPlayerWin);
 
     displayRoundResult.appendChild(resultIcon);
   }
   // Display Round Result and Check Winner
-  const displayResult = document.querySelector(".displayResult");
+  const displayResult = document.querySelector(".result-message");
 
   const gameOutcome = checkWinner();
   console.log(gameOutcome);
