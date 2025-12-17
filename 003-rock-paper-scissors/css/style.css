@@ -29,6 +29,7 @@ body {
 
 header {
   padding-bottom: 2rem;
+  font-size: 1.1rem;
   text-align: center;
 }
 
@@ -52,10 +53,15 @@ header {
   align-items: center;
   border: 1px solid #ccc;
   flex: 1 0 auto;
+  font-size: 6rem;
 }
 
 .choices .computer-choice {
   transform: rotate(180deg);
+}
+
+.result-message {
+  font-size: 1.8rem;
 }
 
 .round-history {
