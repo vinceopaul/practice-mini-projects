@@ -23,4 +23,5 @@ body {
   /* 450 * (16 / 9) ≈ 800px height*/
   aspect-ratio: 9/16;
   background-color: whitesmoke;
+  padding: 2rem;
 }
