@@ -24,6 +24,7 @@ body {
   aspect-ratio: 9/16;
   background-color: whitesmoke;
   padding: 2rem;
+  border-radius: 35px;
 }
 
 header {
