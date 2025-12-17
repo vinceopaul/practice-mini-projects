@@ -25,3 +25,52 @@ body {
   background-color: whitesmoke;
   padding: 2rem;
 }
+
+header {
+  padding-bottom: 2rem;
+  text-align: center;
+}
+
+.display-area {
+  display: flex;
+  height: 550px;
+  flex-direction: column;
+  text-align: center;
+  gap: 2rem;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.choices > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  flex: 1 0 auto;
+}
+
+.choices .computer-choice {
+  transform: rotate(180deg);
+}
+
+.round-history {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}
