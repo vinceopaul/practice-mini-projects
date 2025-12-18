@@ -83,9 +83,14 @@ function playRound(playerChoice) {
   const computerSelection = getComputerChoice();
 
   // Display Player and Comp Choice
+  const choices = {
+    rock: "✊",
+    paper: "✋",
+    scissors: "✌️",
+  };
   const displayChoice = document.querySelector(".choices");
-  displayChoice.firstElementChild.textContent = `Computer chooses: ${computerSelection}`;
-  displayChoice.lastElementChild.textContent = `Player chooses: ${playerSelection}`;
+  displayChoice.firstElementChild.textContent = choices[computerSelection];
+  displayChoice.lastElementChild.textContent = choices[playerSelection];
 
   // Get Result
   const roundDataResult = getRoundResult(playerSelection, computerSelection);
