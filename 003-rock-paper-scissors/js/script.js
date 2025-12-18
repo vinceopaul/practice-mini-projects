@@ -141,9 +141,7 @@ const disableChoiceBtns = () => {
 
 const playerChoices = document.querySelectorAll(".controls > button");
 playerChoices.forEach((buttonChoice) => {
-  let playerChoice = "";
   buttonChoice.addEventListener("click", () => {
-    playerChoice = buttonChoice.className;
-    playRound(playerChoice);
+    playRound(buttonChoice.className);
   });
 });
