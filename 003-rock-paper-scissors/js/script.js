@@ -1,3 +1,37 @@
+let gameScore = {
+  playerScore: 0,
+  computerScore: 0,
+};
+
+const DISPLAY_CHOICE = {
+  rock: "✊",
+  paper: "✋",
+  scissors: "✌️",
+};
+
+const ROUND_RESULT = {
+  TIE: "TIE",
+  WIN: "YES",
+  LOSE: "NO",
+};
+
+const GAME_RESULT = {
+  PLAYER_WINS: "player_wins",
+  COMPUTER_WINS: "computer_wins",
+};
+
+const GAME_RESULT_MSG = {
+  player_wins: "Congrats! Player Wins!",
+  computer_wins: "Computer Wins! Better luck Next time!",
+};
+
+const disableChoiceBtns = () => {
+  const playerChoices = document.querySelectorAll(".controls > button");
+  playerChoices.forEach((buttonChoice) => {
+    buttonChoice.setAttribute("disabled", "");
+  });
+};
+
 const createRoundResultIcon = (didPlayerWin) => {
   const CHECK_ICON_SVG = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM16.0303 8.96967C16.3232 9.26256 16.3232 9.73744 16.0303 10.0303L11.0303 15.0303C10.7374 15.3232 10.2626 15.3232 9.96967 15.0303L7.96967 13.0303C7.67678 12.7374 7.67678 12.2626 7.96967 11.9697C8.26256 11.6768 8.73744 11.6768 9.03033 11.9697L10.5 13.4393L12.7348 11.2045L14.9697 8.96967C15.2626 8.67678 15.7374 8.67678 16.0303 8.96967Z" fill="#000000"></path></svg>`;
 
@@ -7,7 +41,7 @@ const createRoundResultIcon = (didPlayerWin) => {
 
   const iconSpan = document.createElement("span");
 
-  if (didPlayerWin === "no") {
+  if (didPlayerWin === ROUND_RESULT.LOSE) {
     iconSpan.className = "cross-mark";
     iconSpan.innerHTML = CROSS_ICON_SVG;
   } else {
@@ -18,25 +52,87 @@ const createRoundResultIcon = (didPlayerWin) => {
   return iconSpan;
 };
 
-function scoreTracker() {
-  const gameScore = {
-    playerScore: 0,
-    computerScore: 0,
+const displayRoundResultIcon = (result) => {
+  if (result === ROUND_RESULT.TIE) {
+    return;
+  }
+  const displayRoundResult = document.querySelector(".round-history");
+
+  const resultIcon = createRoundResultIcon(result);
+
+  displayRoundResult.appendChild(resultIcon);
+};
+
+const ROUND_MSG = (result, playerChoice, computerChoice) => {
+  const message = {
+    YES: `You win! ${playerChoice} wins ${computerChoice}`,
+    NO: `You lose! ${computerChoice} wins ${playerChoice}`,
+    TIE: "It's a tie! Play Again!",
   };
-  return gameScore;
+
+  return message[result];
+};
+
+const displayRoundResult = (
+  playerChoice,
+  computerChoice,
+  result,
+  gameStatus
+) => {
+  const resultMsg = ROUND_MSG(result, playerChoice, computerChoice, gameStatus);
+  const displayResult = document.querySelector(".result-message");
+
+  if (!gameStatus) {
+    // Display resultMsg if no current winner
+    displayResult.firstElementChild.textContent = resultMsg;
+  } else {
+    displayResult.firstElementChild.textContent = GAME_RESULT_MSG[gameStatus];
+    disableChoiceBtns();
+  }
+};
+
+const displayChoice = (playerChoice, computerChoice) => {
+  const displayChoice = document.querySelector(".choices");
+  displayChoice.firstElementChild.textContent = DISPLAY_CHOICE[computerChoice];
+  displayChoice.lastElementChild.textContent = DISPLAY_CHOICE[playerChoice];
+};
+
+function displayRound(roundData) {
+  displayChoice(roundData.playerChoice, roundData.computerChoice);
+  displayRoundResult(
+    roundData.playerChoice,
+    roundData.computerChoice,
+    roundData.result,
+    roundData.gameStatus
+  );
+  displayRoundResultIcon(roundData.result);
 }
 
-const getResultMsg = (didPlayerWin, playerChoice, computerChoice) => {
-  const msg = {
-    tie: "It's a tie! Play Again!",
-    yes: `You win! ${playerChoice} wins ${computerChoice}`,
-    no: `You lose! ${computerChoice} wins ${playerChoice}`,
-    win: "Congrats! Player Wins!",
-    lose: "Computer Wins! Better luck Next time!",
-    "": "no msg",
-  };
+const checkWinner = (currentScore) => {
+  if (currentScore.playerScore !== 5 && currentScore.computerScore !== 5) {
+    return;
+  }
 
-  return msg[didPlayerWin];
+  return currentScore.playerScore === 5
+    ? GAME_RESULT.PLAYER_WINS
+    : GAME_RESULT.COMPUTER_WINS;
+};
+
+const updateScore = (didPlayerWin, currentScore) => {
+  if (didPlayerWin === ROUND_RESULT.TIE) {
+    return currentScore;
+  }
+
+  return {
+    playerScore:
+      didPlayerWin === ROUND_RESULT.WIN
+        ? currentScore.playerScore + 1
+        : currentScore.playerScore,
+    computerScore:
+      didPlayerWin === ROUND_RESULT.LOSE
+        ? currentScore.computerScore + 1
+        : currentScore.computerScore,
+  };
 };
 
 function getWinningChoice(pChoice) {
@@ -49,99 +145,49 @@ function getWinningChoice(pChoice) {
 }
 
 const getRoundResult = (playerChoice, computerChoice) => {
-  let roundResultData = {};
+  let didPlayerWin = "";
 
   if (playerChoice === computerChoice) {
-    roundResultData.didPlayerWin = "tie";
+    didPlayerWin = ROUND_RESULT.TIE;
   } else if (computerChoice === getWinningChoice(playerChoice)) {
-    roundResultData.didPlayerWin = "yes";
+    didPlayerWin = ROUND_RESULT.WIN;
   } else {
-    roundResultData.didPlayerWin = "no";
+    didPlayerWin = ROUND_RESULT.LOSE;
   }
 
-  roundResultData.message = getResultMsg(
-    roundResultData.didPlayerWin,
-    playerChoice,
-    computerChoice
-  );
-
-  return roundResultData;
+  return didPlayerWin;
 };
 
-function getComputerChoice() {
+const getComputerChoice = () => {
   const randVal = Math.round(Math.random() * 2);
   const choice = ["rock", "paper", "scissors"][randVal];
   return choice;
-}
-
-const getScore = scoreTracker();
-
-function playRound(playerChoice) {
-  const playerSelection = playerChoice;
-  const computerSelection = getComputerChoice();
-
-  // Display Player and Comp Choice
-  const choices = {
-    rock: "✊",
-    paper: "✋",
-    scissors: "✌️",
-  };
-  const displayChoice = document.querySelector(".choices");
-  displayChoice.firstElementChild.textContent = choices[computerSelection];
-  displayChoice.lastElementChild.textContent = choices[playerSelection];
-
-  // Get Result
-  const roundDataResult = getRoundResult(playerSelection, computerSelection);
-  console.log("roundData,", roundDataResult);
-
-  if (roundDataResult.didPlayerWin !== "tie") {
-    // Score
-    roundDataResult.didPlayerWin === "yes"
-      ? getScore.playerScore++
-      : getScore.computerScore++;
-    // Display Round Result Icon
-    const displayRoundResult = document.querySelector(".round-history");
-
-    const resultIcon = createRoundResultIcon(roundDataResult.didPlayerWin);
-
-    displayRoundResult.appendChild(resultIcon);
-  }
-  // Display Round Result and Check Winner
-  const displayResult = document.querySelector(".result-message");
-
-  const gameOutcome = checkWinner();
-  console.log(gameOutcome);
-
-  if (gameOutcome === undefined) {
-    displayResult.firstElementChild.textContent = roundDataResult.message;
-  } else {
-    displayResult.firstElementChild.textContent = getResultMsg(gameOutcome);
-    // Disable button
-    disableChoiceBtns();
-  }
-}
-
-const checkWinner = () => {
-  const playerScore = getScore.playerScore;
-  const computerScore = getScore.computerScore;
-
-  if (playerScore !== 5 && computerScore !== 5) {
-    return;
-  }
-
-  return playerScore === 5 ? "win" : "lose";
 };
 
-const disableChoiceBtns = () => {
-  const playerChoices = document.querySelectorAll(".controls > button");
-  playerChoices.forEach((buttonChoice) => {
-    buttonChoice.setAttribute("disabled", "");
-  });
+function playRound(playerChoice, currentScore) {
+  const computerChoice = getComputerChoice();
+  const result = getRoundResult(playerChoice, computerChoice);
+  const newScore = updateScore(result, currentScore);
+  const gameStatus = checkWinner(newScore);
+
+  return {
+    playerChoice,
+    computerChoice,
+    result,
+    newScore,
+    gameStatus,
+  };
+}
+
+const startRound = (buttonChoice, currentScore) => {
+  const roundData = playRound(buttonChoice, currentScore);
+  gameScore = roundData.newScore;
+  displayRound(roundData);
 };
 
 const playerChoices = document.querySelectorAll(".controls > button");
 playerChoices.forEach((buttonChoice) => {
   buttonChoice.addEventListener("click", () => {
-    playRound(buttonChoice.className);
+    startRound(buttonChoice.className, gameScore);
   });
 });
