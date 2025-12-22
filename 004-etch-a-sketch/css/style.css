@@ -13,6 +13,15 @@ body {
   align-items: center;
   background-color: whitesmoke;
 }
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  font-size: 1.5em;
+  padding: 10px;
+}
 
 .container {
   height: auto;
