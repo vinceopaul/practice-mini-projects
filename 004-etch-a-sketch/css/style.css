@@ -18,6 +18,12 @@ body {
   height: auto;
   width: 600px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   border: 2px solid black;
+}
+
+.cell {
+  aspect-ratio: 1/1;
+  border: 1px solid black;
 }
