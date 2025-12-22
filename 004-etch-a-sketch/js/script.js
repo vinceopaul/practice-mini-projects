@@ -1,3 +1,11 @@
+const gridContainer = document.querySelector(".container");
+
+function displayGridCell(arrOfCell) {
+  arrOfCell.forEach((cell) => {
+    gridContainer.append(cell);
+  });
+}
+
 function createGrid(gridSize, cellSize) {
   const arrOfCell = [];
 
@@ -27,6 +35,8 @@ function startGrid(cellCountPerSide) {
 
 function start(cellCountPerSide = 16 /* Default */) {
   const gridData = startGrid(cellCountPerSide);
+
+  displayGridCell(gridData);
 }
 
 let cellCountPerSide;
