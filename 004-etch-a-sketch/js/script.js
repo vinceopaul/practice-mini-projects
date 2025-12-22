@@ -42,3 +42,14 @@ function start(cellCountPerSide = 16 /* Default */) {
 let cellCountPerSide;
 
 start(cellCountPerSide);
+
+gridContainer.addEventListener("mousemove", tagGridCell);
+
+function tagGridCell(event) {
+  const gridCells = event.target;
+
+  if (gridCells.className !== "container") {
+    gridCells.classList.add("cellHover");
+    gridCells.style.cursor = "crosshair";
+  }
+}
