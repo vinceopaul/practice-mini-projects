@@ -43,13 +43,36 @@ let cellCountPerSide;
 
 start(cellCountPerSide);
 
-gridContainer.addEventListener("mousemove", tagGridCell);
-
 function tagGridCell(event) {
-  const gridCells = event.target;
+  if (!isPainting) return;
 
-  if (gridCells.className !== "container") {
-    gridCells.classList.add("cellHover");
-    gridCells.style.cursor = "crosshair";
-  }
+  gridContainer.style.cursor = "crosshair";
+
+  const cell = event.currentTarget;
+  cell.classList.add("cellHover");
 }
+
+const cells = document.querySelectorAll(".cell");
+let isPainting = false;
+
+gridContainer.addEventListener("mousedown", (event) => {
+  event.preventDefault();
+
+  isPainting = true;
+
+  const firstCell = event.target;
+  if (firstCell.classList.contains("cell")) {
+    tagGridCell({ currentTarget: firstCell });
+  }
+
+  cells.forEach((cell) => {
+    if (!cell.classList.contains("cellHover")) {
+      cell.addEventListener("mouseenter", tagGridCell, { once: true });
+    }
+  });
+});
+
+window.addEventListener("mouseup", () => {
+  isPainting = false;
+  gridContainer.style.cursor = "default";
+});
