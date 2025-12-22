@@ -33,7 +33,7 @@ function startGrid(cellCountPerSide) {
   return grid;
 }
 
-function start(cellCountPerSide = 16 /* Default */) {
+function start(cellCountPerSide = 50 /* Default */) {
   const gridData = startGrid(cellCountPerSide);
 
   displayGridCell(gridData);
@@ -53,6 +53,8 @@ function tagGridCell(event) {
 }
 
 const cells = document.querySelectorAll(".cell");
+console.log(cells);
+
 let isPainting = false;
 
 gridContainer.addEventListener("mousedown", (event) => {
@@ -76,3 +78,12 @@ window.addEventListener("mouseup", () => {
   isPainting = false;
   gridContainer.style.cursor = "default";
 });
+
+function clearGrid() {
+  cells.forEach((cell) => {
+    cell.classList.remove("cellHover");
+  });
+}
+
+const clearGridBtn = document.querySelector(".clear-grid");
+clearGridBtn.addEventListener("click", clearGrid);
