@@ -16,10 +16,10 @@ body {
 
 .container {
   height: auto;
-  width: 600px;
+  width: 700px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end;
   border: 2px solid black;
 }
 
