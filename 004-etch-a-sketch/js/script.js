@@ -9,6 +9,18 @@ const msg = {
   INVALID_INPUT: "Error! Invalid Input!",
 };
 
+const randomizeRGBColor = (min = 1, max = 256) => {
+  const [r, g, b] = Array.from({ length: 3 }, () =>
+    Math.floor(Math.random() * (max - min) + min)
+  );
+
+  return {
+    r,
+    g,
+    b,
+  };
+};
+
 const gridContainer = document.querySelector(".container");
 
 const gridCell = () => document.querySelectorAll(".cell");
@@ -52,11 +64,14 @@ function start(cellCountPerSide = defGridDim /* Default */) {
   displayGridCell(gridData);
 }
 
+let randDrawColor = randomizeRGBColor();
+
 function tagGridCell(event) {
   if (!isPainting) return;
 
   if (event.target.matches(".cell")) {
     event.target.classList.add("cellHover");
+    event.target.style.backgroundColor = `rgb(${randDrawColor.r},${randDrawColor.g},${randDrawColor.b})`;
   }
 }
 
@@ -74,6 +89,7 @@ gridContainer.addEventListener("mousedown", (event) => {
 
   if (firstCell.matches(".cell")) {
     firstCell.classList.add("cellHover");
+    firstCell.style.backgroundColor = `rgb(${randDrawColor.r},${randDrawColor.g},${randDrawColor.b})`;
   }
   //
 
@@ -84,6 +100,7 @@ window.addEventListener("mouseup", () => {
   isPainting = false;
   gridContainer.removeEventListener("mouseover", tagGridCell);
   gridContainer.style.cursor = "default";
+  randDrawColor = randomizeRGBColor();
 });
 
 function clearGrid() {
