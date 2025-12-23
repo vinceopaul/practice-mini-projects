@@ -45,7 +45,6 @@ start(cellCountPerSide);
 
 function tagGridCell(event) {
   if (!isPainting) return;
-
   gridContainer.style.cursor = "crosshair";
 
   const cell = event.currentTarget;
@@ -61,11 +60,6 @@ gridContainer.addEventListener("mousedown", (event) => {
   event.preventDefault();
 
   isPainting = true;
-
-  const firstCell = event.target;
-  if (firstCell.classList.contains("cell")) {
-    tagGridCell({ currentTarget: firstCell });
-  }
 
   cells.forEach((cell) => {
     if (!cell.classList.contains("cellHover")) {
@@ -85,5 +79,40 @@ function clearGrid() {
   });
 }
 
+function changeGrid() {
+  while (true) {
+    const input = prompt("Input new grid num (Min: 16, Max: 100)");
+
+    if (input === null) return;
+
+    const trimmed = input.trim();
+
+    if (trimmed === "") {
+      alert("Error: Invalid Input!");
+      continue;
+    }
+
+    const num = Number(trimmed);
+
+    if (!Number.isFinite(num)) {
+      alert("Error: Invalid Input!");
+      continue;
+    }
+
+    if (num < 16 || num > 100) {
+      alert("Error: Invalid Input!");
+      continue;
+    }
+
+    document.querySelectorAll(".cell").forEach((cell) => cell.remove());
+    start(num);
+
+    return;
+  }
+}
+
 const clearGridBtn = document.querySelector(".clear-grid");
 clearGridBtn.addEventListener("click", clearGrid);
+
+const changeGridBtn = document.querySelector(".change-grid");
+changeGridBtn.addEventListener("click", changeGrid);
