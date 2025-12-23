@@ -51,9 +51,6 @@ function tagGridCell(event) {
   cell.classList.add("cellHover");
 }
 
-const cells = document.querySelectorAll(".cell");
-console.log(cells);
-
 let isPainting = false;
 
 gridContainer.addEventListener("mousedown", (event) => {
@@ -61,6 +58,7 @@ gridContainer.addEventListener("mousedown", (event) => {
 
   isPainting = true;
 
+  const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
     if (!cell.classList.contains("cellHover")) {
       cell.addEventListener("mouseenter", tagGridCell, { once: true });
@@ -74,7 +72,7 @@ window.addEventListener("mouseup", () => {
 });
 
 function clearGrid() {
-  cells.forEach((cell) => {
+  document.querySelectorAll(".cell").forEach((cell) => {
     cell.classList.remove("cellHover");
   });
 }
