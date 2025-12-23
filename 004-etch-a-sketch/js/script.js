@@ -3,6 +3,10 @@ const bounds = {
   maxGrid: 100,
 };
 
+const msg = {
+  INVALID_INPUT: "Error! Invalid Input!",
+};
+
 const gridContainer = document.querySelector(".container");
 
 function displayGridCell(arrOfCell) {
@@ -100,19 +104,19 @@ function changeGrid() {
     const trimmed = input.trim();
 
     if (trimmed === "") {
-      alert("Error: Invalid Input!");
+      alert(msg.INVALID_INPUT);
       continue;
     }
 
     const num = Number(trimmed);
 
     if (!Number.isFinite(num)) {
-      alert("Error: Invalid Input!");
+      alert(msg.INVALID_INPUT);
       continue;
     }
 
     if (num < bounds.minGrid || bounds.maxGrid > 100) {
-      alert("Error: Invalid Input!");
+      alert(msg.INVALID_INPUT);
       continue;
     }
 
