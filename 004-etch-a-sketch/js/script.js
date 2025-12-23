@@ -63,6 +63,12 @@ gridContainer.addEventListener("mousedown", (event) => {
 
   isPainting = true;
 
+  const firstCell = event.target;
+
+  if (firstCell.classList.contains("cell")) {
+    tagGridCell({ currentTarget: firstCell });
+  }
+
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
     if (!cell.classList.contains("cellHover")) {
