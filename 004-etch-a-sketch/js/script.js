@@ -33,7 +33,7 @@ function startGrid(cellCountPerSide) {
   return grid;
 }
 
-function start(cellCountPerSide = 50 /* Default */) {
+function start(cellCountPerSide = 16 /* Default */) {
   const gridData = startGrid(cellCountPerSide);
 
   displayGridCell(gridData);
