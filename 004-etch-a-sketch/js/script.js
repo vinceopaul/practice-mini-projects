@@ -1,3 +1,8 @@
+const bounds = {
+  minGrid: 16,
+  maxGrid: 100,
+};
+
 const gridContainer = document.querySelector(".container");
 
 function displayGridCell(arrOfCell) {
@@ -79,7 +84,10 @@ function clearGrid() {
 
 function changeGrid() {
   while (true) {
-    const input = prompt("Input new grid num (Min: 16, Max: 100)");
+    const input = prompt(
+      "Input new grid num (Min: 16, Max: 100)",
+      bounds.minGrid
+    );
 
     if (input === null) return;
 
@@ -97,7 +105,7 @@ function changeGrid() {
       continue;
     }
 
-    if (num < 16 || num > 100) {
+    if (num < bounds.minGrid || bounds.maxGrid > 100) {
       alert("Error: Invalid Input!");
       continue;
     }
