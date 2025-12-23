@@ -54,10 +54,10 @@ function start(cellCountPerSide = defGridDim /* Default */) {
 
 function tagGridCell(event) {
   if (!isPainting) return;
-  gridContainer.style.cursor = "crosshair";
 
-  const cell = event.currentTarget;
-  cell.classList.add("cellHover");
+  if (event.target.matches(".cell")) {
+    event.target.classList.add("cellHover");
+  }
 }
 
 let isPainting = false;
@@ -67,21 +67,22 @@ gridContainer.addEventListener("mousedown", (event) => {
 
   isPainting = true;
 
+  gridContainer.style.cursor = "crosshair";
+
+  // Single Cell
   const firstCell = event.target;
 
-  if (firstCell.classList.contains("cell")) {
-    tagGridCell({ currentTarget: firstCell });
+  if (firstCell.matches(".cell")) {
+    firstCell.classList.add("cellHover");
   }
+  //
 
-  gridCell()?.forEach((cell) => {
-    if (!cell.classList.contains("cellHover")) {
-      cell.addEventListener("mouseenter", tagGridCell, { once: true });
-    }
-  });
+  gridContainer.addEventListener("mouseover", tagGridCell);
 });
 
 window.addEventListener("mouseup", () => {
   isPainting = false;
+  gridContainer.removeEventListener("mouseover", tagGridCell);
   gridContainer.style.cursor = "default";
 });
 
