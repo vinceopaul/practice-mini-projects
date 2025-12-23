@@ -9,6 +9,8 @@ const msg = {
 
 const gridContainer = document.querySelector(".container");
 
+const gridCell = () => (cell = document.querySelectorAll(".cell"));
+
 function displayGridCell(arrOfCell) {
   arrOfCell.forEach((cell) => {
     gridContainer.append(cell);
@@ -73,8 +75,7 @@ gridContainer.addEventListener("mousedown", (event) => {
     tagGridCell({ currentTarget: firstCell });
   }
 
-  const cells = document.querySelectorAll(".cell");
-  cells.forEach((cell) => {
+  gridCell()?.forEach((cell) => {
     if (!cell.classList.contains("cellHover")) {
       cell.addEventListener("mouseenter", tagGridCell, { once: true });
     }
@@ -87,7 +88,7 @@ window.addEventListener("mouseup", () => {
 });
 
 function clearGrid() {
-  document.querySelectorAll(".cell").forEach((cell) => {
+  gridCell()?.forEach((cell) => {
     cell.classList.remove("cellHover");
   });
 }
@@ -120,7 +121,8 @@ function changeGrid() {
       continue;
     }
 
-    document.querySelectorAll(".cell").forEach((cell) => cell.remove());
+    gridCell()?.forEach((cell) => cell.remove());
+
     start(num);
 
     return;
