@@ -1,3 +1,5 @@
+const defGridDim = 16;
+
 const bounds = {
   minGrid: 16,
   maxGrid: 100,
@@ -9,7 +11,7 @@ const msg = {
 
 const gridContainer = document.querySelector(".container");
 
-const gridCell = () => (cell = document.querySelectorAll(".cell"));
+const gridCell = () => document.querySelectorAll(".cell");
 
 function displayGridCell(arrOfCell) {
   arrOfCell.forEach((cell) => {
@@ -44,15 +46,11 @@ function startGrid(cellCountPerSide) {
   return grid;
 }
 
-function start(cellCountPerSide = 16 /* Default */) {
+function start(cellCountPerSide = defGridDim /* Default */) {
   const gridData = startGrid(cellCountPerSide);
 
   displayGridCell(gridData);
 }
-
-let cellCountPerSide;
-
-start(cellCountPerSide);
 
 function tagGridCell(event) {
   if (!isPainting) return;
@@ -116,7 +114,7 @@ function changeGrid() {
       continue;
     }
 
-    if (num < bounds.minGrid || bounds.maxGrid > 100) {
+    if (num < bounds.minGrid || num > bounds.maxGrid) {
       alert(msg.INVALID_INPUT);
       continue;
     }
@@ -134,3 +132,5 @@ clearGridBtn.addEventListener("click", clearGrid);
 
 const changeGridBtn = document.querySelector(".change-grid");
 changeGridBtn.addEventListener("click", changeGrid);
+
+start();
