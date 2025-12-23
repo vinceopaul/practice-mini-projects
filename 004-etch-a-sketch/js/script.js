@@ -106,6 +106,7 @@ window.addEventListener("mouseup", () => {
 function clearGrid() {
   gridCell()?.forEach((cell) => {
     cell.classList.remove("cellHover");
+    cell.style.backgroundColor = "";
   });
 }
 
